@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Java Record | Y.Bunsy Chowdary</title>
+<style>
+:root{--bg:#fbf5e9;--ink:#282b37;--card:#fffdf8;--acc:#c94f3d;--blue:#2c6096;--gold:#dba83f;--green:#4f8066;--mut:#70727c;--line:#e5d8c4;--shadow:0 14px 34px rgba(77,55,34,.10)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 90% 4%,#f4ddbb 0,transparent 30%),linear-gradient(180deg,#fcf7ed,#f8efdf);color:var(--ink);font:17px/1.7 "Palatino Linotype","Book Antiqua",Georgia,serif;min-height:100vh}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 5vw;border-bottom:2px solid var(--ink);position:sticky;top:0;background:rgba(252,247,237,.94);backdrop-filter:blur(12px);z-index:5}
+header a{color:var(--ink);text-decoration:none;font-weight:700}.logo{font-family:Georgia,"Times New Roman",serif;font-size:1.1rem;letter-spacing:-.04em}.logo span{color:var(--acc)}header a:last-child{padding:7px 13px;border:1px solid var(--line);border-radius:4px}header a:last-child:hover{background:#f5e4c9;color:var(--acc)}
+main{max-width:1080px;margin:auto;padding:38px 5vw 72px}
+.hero{display:grid;grid-template-columns:1fr 280px;gap:30px;align-items:center;padding:32px;border:1px solid #e4d4ba;border-radius:5px;background:linear-gradient(115deg,#fffaf0 0%,#f8ead4 100%);box-shadow:7px 8px 0 rgba(201,79,61,.12),var(--shadow);animation:soft-rise .55s ease-out both}
+.hero h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.5rem,6vw,4.15rem);line-height:1.05;letter-spacing:-.06em;margin:0 0 16px;font-weight:700}.hero h1 em{color:var(--acc);font-style:normal}.hero p{color:#5f6068;max-width:620px}.hero .crumb{font:700 .74rem/1.5 "Trebuchet MS",Arial,sans-serif;letter-spacing:.15em;color:var(--blue);margin:0 0 15px}
+.id{background:var(--card);border:1px solid #e1d2bc;border-top:4px solid var(--blue);border-radius:5px;padding:22px;text-align:center;box-shadow:0 9px 24px rgba(77,55,34,.09);animation:soft-rise .65s .08s ease-out both}
+.id .monogram{width:82px;height:82px;margin:auto;display:grid;place-items:center;border:3px solid #fff;border-radius:50%;background:var(--acc);color:white;font:bold 1.5rem Georgia,serif;box-shadow:0 0 0 2px var(--gold),0 5px 14px rgba(77,55,34,.14)}
+.id h3{margin:13px 0 5px;font:700 1.15rem Georgia,"Times New Roman",serif}.id table{width:100%;font: .91rem/1.55 "Trebuchet MS",Arial,sans-serif;text-align:left;margin-top:10px;border-collapse:collapse}.id td{padding:6px 0;border-top:1px solid var(--line)}.id td:first-child{color:var(--mut)}
+h2{font:700 1.75rem/1.2 Georgia,"Times New Roman",serif;letter-spacing:-.035em;border-bottom:2px solid var(--line);padding-bottom:10px;margin-top:44px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:14px}
+.wk{position:relative;overflow:hidden;background:var(--tile-bg,#fffdf8);border:1px solid var(--line);border-left:5px solid var(--tile,var(--acc));border-radius:4px;padding:16px;text-decoration:none;color:var(--ink);box-shadow:0 4px 12px rgba(77,55,34,.05);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;animation:soft-rise .45s ease-out both}.wk:hover{transform:translateY(-4px);box-shadow:0 11px 22px rgba(77,55,34,.12)}.wk b{font:700 1.9rem/1.25 Georgia,"Times New Roman",serif;color:var(--tile,var(--acc));display:block;letter-spacing:-.04em}.wk small{color:#64636a;font-family:"Trebuchet MS",Arial,sans-serif}.wk small:first-child{color:var(--tile,var(--acc));font-size:.69rem;font-weight:bold;letter-spacing:.12em}.wk::after{content:"";position:absolute;width:66px;height:66px;right:-27px;bottom:-30px;border-radius:50%;background:var(--tile,var(--acc));opacity:.1;pointer-events:none}.wk:nth-child(5n+2){--tile:var(--blue);--tile-bg:#edf3f8}.wk:nth-child(5n+3){--tile:#ae7625;--tile-bg:#fbf0dc}.wk:nth-child(5n+4){--tile:var(--green);--tile-bg:#edf3eb}.wk:nth-child(5n+5){--tile:#8b5273;--tile-bg:#f5edf2}
+.plist{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:11px}.plist a{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:4px;padding:12px 14px;text-decoration:none;color:var(--ink);font-family:"Trebuchet MS",Arial,sans-serif;transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease,border-color .2s ease}.plist a:hover{background:#fff7e9;transform:translateY(-2px);box-shadow:0 7px 16px rgba(77,55,34,.09)}.plist i{color:var(--acc);font:bold .9rem/1.5 Georgia,serif;min-width:34px}.plist a:nth-child(4n+2){border-left-color:var(--blue)}.plist a:nth-child(4n+3){border-left-color:var(--green)}.plist a:nth-child(4n+4){border-left-color:var(--gold)}
+pre{background:#252b39;color:#fff4db;padding:18px;overflow:auto;border:1px solid #343b4c;border-radius:5px;font:14px/1.65 Consolas,monospace;box-shadow:0 8px 19px rgba(37,43,57,.15)}.out{border-left:4px solid var(--green)}.lbl{font:bold .72rem/1.5 "Trebuchet MS",Arial,sans-serif;letter-spacing:.14em;color:var(--blue);margin:18px 0 6px}
+table.cmp{border-collapse:collapse;width:100%;font: .9rem/1.5 "Trebuchet MS",Arial,sans-serif;display:block;overflow-x:auto;background:var(--card);border-radius:4px}.cmp th,.cmp td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}.cmp th{background:#2c6096;color:white}
+.nav{display:flex;justify-content:space-between;margin-top:30px}.nav a,.btn{border:1px solid #d7c6aa;border-radius:4px;padding:8px 15px;color:var(--ink);text-decoration:none;background:var(--card);font:700 .95rem "Trebuchet MS",Arial,sans-serif;transition:transform .2s ease,background-color .2s ease,border-color .2s ease,color .2s ease}.nav a:hover,.btn:hover{border-color:var(--acc);background:#fff1da;color:var(--acc);transform:translateY(-1px)}
+.crumb{color:var(--mut);font-size:.9rem}.crumb a{color:var(--blue)}.pend{color:var(--mut);font-style:italic}ol li{margin:7px 0}a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+@keyframes soft-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes toast-in{from{opacity:0;transform:translate(18px,12px) scale(.98)}to{opacity:1;transform:translate(0) scale(1)}}
+#welcome-toast{display:none;position:fixed;z-index:20;right:24px;bottom:24px;width:min(360px,calc(100vw - 32px));padding:18px 42px 18px 18px;border:1px solid #d6c39f;border-left:5px solid var(--acc);border-radius:5px;background:#fffaf0;box-shadow:0 14px 34px rgba(77,55,34,.22)}#welcome-toast.show{display:block;animation:toast-in .35s cubic-bezier(.2,.8,.2,1) both}#welcome-toast strong{display:block;color:var(--acc);font:700 1.1rem Georgia,serif;margin-bottom:3px}#welcome-toast p{margin:0 0 10px;color:#62616a;font-size:.9rem;line-height:1.45}#welcome-toast .toast-link{color:var(--blue);font:700 .88rem "Trebuchet MS",Arial,sans-serif;text-decoration:none}#welcome-toast .toast-link:hover{text-decoration:underline}#welcome-close{position:absolute;right:10px;top:9px;width:30px;height:30px;border:0;border-radius:50%;background:#f4e7d2;color:var(--acc);font-size:1.2rem;cursor:pointer}#welcome-close:hover{background:#eddbc0}
+.grid .wk:nth-child(2){animation-delay:.04s}.grid .wk:nth-child(3){animation-delay:.08s}.grid .wk:nth-child(4){animation-delay:.12s}.grid .wk:nth-child(5){animation-delay:.16s}.grid .wk:nth-child(6){animation-delay:.20s}.grid .wk:nth-child(7){animation-delay:.24s}.grid .wk:nth-child(8){animation-delay:.28s}.grid .wk:nth-child(9){animation-delay:.32s}.grid .wk:nth-child(10){animation-delay:.36s}.grid .wk:nth-child(11){animation-delay:.40s}.grid .wk:nth-child(12){animation-delay:.44s}
+@media(max-width:700px){main{padding:22px 5vw 48px}.hero{grid-template-columns:1fr;gap:20px;padding:22px;border-radius:4px}.hero h1{font-size:2.45rem}.id{max-width:340px;width:100%;margin:auto}.plist{grid-template-columns:1fr}#welcome-toast{right:16px;bottom:16px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+@media print{header,.nav,#welcome-toast{display:none}body{background:#fff;color:#111}main{max-width:none}.wk,.id,pre{break-inside:avoid}}
+</style></head><body>
+<header><a href="#/" class="logo">&lt;java<span>/</span>notebook&gt;</a><a href="#/">Home</a></header>
+<main id="app"></main>
+<aside id="welcome-toast" role="status" aria-live="polite"><button id="welcome-close" type="button" aria-label="Dismiss welcome message">×</button><strong>Hi, welcome! ✨</strong><p>Take a look around my Java lab record and explore the weekly programs.</p><a class="toast-link" href="#/w/1">Start exploring →</a></aside>
+<script>
+const r=String.raw;
+const P=(t,c,o)=>({t,c,o}); // program
+const W={
+1:{name:"Comparative Table",sub:"Java, C, C++, Python & JavaScript",table:{
+h:["Feature","Java","C","C++","Python","JavaScript"],
+r:[["Paradigm","Object-oriented","Procedural","Procedural + OOP","Multi-paradigm","Multi-paradigm, event-driven"],
+["Execution","Compiled to bytecode, run on JVM","Compiled to machine code","Compiled to machine code","Interpreted","Interpreted / JIT"],
+["Typing","Static, strong","Static, weak","Static","Dynamic, strong","Dynamic, weak"],
+["Memory","Automatic (garbage collector)","Manual","Manual (RAII)","Automatic (GC)","Automatic (GC)"],
+["Platform independent","Yes (WORA)","No","No","Yes (interpreter)","Yes (browser/Node)"],
+["Pointers","No","Yes","Yes","No","No"],
+["Multiple inheritance","Via interfaces","N/A","Yes","Yes","No (prototypes/mixins)"],
+["Speed","Fast","Fastest","Fastest","Slow","Moderate"],
+["Typical use","Enterprise, Android, backend","OS, embedded","Games, systems","AI/ML, scripting","Web front-end & back-end"],
+["File extension",".java / .class",".c",".cpp",".py",".js"]]}},
+2:{name:"JDK Installation",sub:"Oracle JDK & OpenJDK on Windows",steps:[
+["Program 1: Oracle JDK Installation — Windows",["Open oracle.com/java/technologies/downloads and choose the Windows tab.","Download the x64 Installer (.exe) of the latest JDK.","Double-click the installer and click Next.","Keep the default folder (C:\\Program Files\\Java\\jdk-xx) and click Next, then Close.","Open Environment Variables → System variables → New: JAVA_HOME = JDK folder path.","Edit Path and add %JAVA_HOME%\\bin.","Open Command Prompt and run java -version and javac -version to verify."]],
+["Program 2: OpenJDK Installation — Windows",["Open jdk.java.net (or adoptium.net) and download the Windows x64 ZIP/MSI.","Extract the ZIP to C:\\Java\\openjdk (MSI users run the installer instead).","Set JAVA_HOME to the extracted folder.","Add %JAVA_HOME%\\bin to the Path variable.","Restart Command Prompt and run java -version.","Output shows: openjdk version \"xx\" — installation successful." ]]],progs:[
+P("Oracle JDK Installation — Windows",r`# Install the Oracle JDK, then verify it in Command Prompt
+java -version
+javac -version`,`Java and javac versions are displayed`),
+P("OpenJDK Installation — Windows",r`# Extract OpenJDK, set JAVA_HOME, then verify it
+java -version
+javac -version`,`OpenJDK and javac versions are displayed`)]},
+3:{name:"Java Basics",sub:"Data types, operators, conversions, loops",progs:[
+P("Hello, Java! — basic structure",r`public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java!");
+    }
+}`,"Hello, Java!"),
+P("All primitive data types",r`public class Main {
+    public static void main(String[] args) {
+        byte b = 100; short s = 30000; int i = 2000000;
+        long l = 9000000000L; float f = 3.14f;
+        double d = 2.718281828; char c = 'J'; boolean flag = true;
+        System.out.println("byte: " + b);
+        System.out.println("short: " + s);
+        System.out.println("int: " + i);
+        System.out.println("long: " + l);
+        System.out.println("float: " + f);
+        System.out.println("double: " + d);
+        System.out.println("char: " + c);
+        System.out.println("boolean: " + flag);
+    }
+}`,`byte: 100
+short: 30000
+int: 2000000
+long: 9000000000
+float: 3.14
+double: 2.718281828
+char: J
+boolean: true`),
+P("Integer arithmetic",r`public class Main {
+    public static void main(String[] args) {
+        int a = 17, b = 5;
+        System.out.println("Addition: " + (a + b));
+        System.out.println("Subtraction: " + (a - b));
+        System.out.println("Multiplication: " + (a * b));
+        System.out.println("Division: " + (a / b));
+        System.out.println("Modulus: " + (a % b));
+    }
+}`,`Addition: 22
+Subtraction: 12
+Multiplication: 85
+Division: 3
+Modulus: 2`),
+P("Floating-point arithmetic",r`public class Main {
+    public static void main(String[] args) {
+        double x = 7.5, y = 2.5;
+        System.out.println("Sum: " + (x + y));
+        System.out.println("Difference: " + (x - y));
+        System.out.println("Product: " + (x * y));
+        System.out.println("Quotient: " + (x / y));
+    }
+}`,`Sum: 10.0
+Difference: 5.0
+Product: 18.75
+Quotient: 3.0`),
+P("Character data type & ASCII",r`public class Main {
+    public static void main(String[] args) {
+        char ch = 'A';
+        System.out.println("Character: " + ch);
+        System.out.println("ASCII/Unicode value: " + (int) ch);
+    }
+}`,`Character: A
+ASCII/Unicode value: 65`),
+P("Boolean & relational operators",r`public class Main {
+    public static void main(String[] args) {
+        int a = 10, b = 20;
+        boolean t = true;
+        System.out.println("t = " + t);
+        System.out.println("a > b : " + (a > b));
+        System.out.println("a < b : " + (a < b));
+        System.out.println("a == b : " + (a == b));
+        System.out.println("a != b : " + (a != b));
+        System.out.println("a >= 10 : " + (a >= 10));
+    }
+}`,`t = true
+a > b : false
+a < b : true
+a == b : false
+a != b : true
+a >= 10 : true`),
+P("Declaring & initializing variables",r`public class Main {
+    public static void main(String[] args) {
+        String name = "Karthikeya";
+        int age = 19;
+        double cgpa = 8.7;
+        char section = 'B';
+        boolean passed = true;
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("CGPA: " + cgpa);
+        System.out.println("Section: " + section);
+        System.out.println("Passed: " + passed);
+    }
+}`,`Name: Karthikeya
+Age: 19
+CGPA: 8.7
+Section: B
+Passed: true`),
+P("Swap using a temporary variable",r`public class Main {
+    public static void main(String[] args) {
+        int a = 10, b = 20, temp;
+        System.out.println("Before: a=" + a + ", b=" + b);
+        temp = a; a = b; b = temp;
+        System.out.println("After: a=" + a + ", b=" + b);
+    }
+}`,`Before: a=10, b=20
+After: a=20, b=10`),
+P("Widening type conversion",r`public class Main {
+    public static void main(String[] args) {
+        int i = 100;
+        long l = i;
+        float f = l;
+        double d = f;
+        System.out.println("int: " + i);
+        System.out.println("long: " + l);
+        System.out.println("float: " + f);
+        System.out.println("double: " + d);
+    }
+}`,`int: 100
+long: 100
+float: 100.0
+double: 100.0`),
+P("Narrowing type casting",r`public class Main {
+    public static void main(String[] args) {
+        double d = 9.78;
+        int i = (int) d;
+        byte b = (byte) 300;
+        System.out.println("double: " + d);
+        System.out.println("int after cast: " + i);
+        System.out.println("byte after cast: " + b);
+    }
+}`,`double: 9.78
+int after cast: 9
+byte after cast: 44`),
+P("Character & ASCII conversion",r`public class Main {
+    public static void main(String[] args) {
+        char c = 'a';
+        int code = c;
+        char next = (char) (code + 1);
+        System.out.println(c + " -> " + code);
+        System.out.println(code + " + 1 -> " + next);
+        System.out.println(66 + " -> " + (char) 66);
+    }
+}`,`a -> 97
+97 + 1 -> b
+66 -> B`),
+P("Even or odd",r`public class Main {
+    public static void main(String[] args) {
+        int n = 27;
+        if (n % 2 == 0) System.out.println(n + " is Even");
+        else System.out.println(n + " is Odd");
+    }
+}`,"27 is Odd"),
+P("Largest of two numbers",r`public class Main {
+    public static void main(String[] args) {
+        int a = 45, b = 78;
+        int max = (a > b) ? a : b;
+        System.out.println("Largest = " + max);
+    }
+}`,"Largest = 78"),
+P("Reserved keywords",r`public class Main {
+    static final int LIMIT = 3;           // static, final
+    public static void main(String[] args) {
+        int x = 5;                        // int
+        if (x > 2) {                      // if
+            System.out.println("x is greater than 2");
+        } else {                          // else
+            System.out.println("x is small");
+        }
+        for (int i = 0; i < LIMIT; i++) { // for
+            System.out.println("Loop " + i);
+        }
+    }
+}
+// Keywords used: public, class, static, final, void, int, if, else, for`,`x is greater than 2
+Loop 0
+Loop 1
+Loop 2`),
+P("for loop — numbers 1 to 10",r`public class Main {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 10; i++) {
+            System.out.print(i + " ");
+        }
+    }
+}`,"1 2 3 4 5 6 7 8 9 10 ")]},
+4:{name:"No Programs",sub:"No programming task was assigned this week",none:1},
+5:{name:"No Programs",sub:"No programming task was assigned this week",none:1},
+6:{name:"Classes & Objects",sub:"Constructors, GC, overloading, static, nested classes",progs:[
+P("Student Information System",r`class Student {
+    int id; String name; String branch;
+    void display() {
+        System.out.println("ID: " + id + ", Name: " + name + ", Branch: " + branch);
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Student s = new Student();
+        s.id = 101; s.name = "Karthikeya"; s.branch = "AI&ML";
+        s.display();
+    }
+}`,"ID: 101, Name: Karthikeya, Branch: AI&ML"),
+P("Employee Information System",r`class Employee {
+    int id; String name; double salary;
+    void display() {
+        System.out.println("ID: " + id + ", Name: " + name + ", Salary: " + salary);
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Employee e = new Employee();
+        e.id = 201; e.name = "Ravi"; e.salary = 45000;
+        e.display();
+    }
+}`,`ID: 201, Name: Ravi, Salary: 45000.0`),P("Book Details — Multiple Objects",r`class Book {
+    int id; String title, author;
+    Book(int id, String title, String author) {
+        this.id = id; this.title = title; this.author = author;
+    }
+    void show() { System.out.println("ID: " + id + ", Title: " + title + ", Author: " + author); }
+}
+public class Main {
+    public static void main(String[] args) {
+        Book b1 = new Book(1, "Java Complete Reference", "Herbert Schildt");
+        Book b2 = new Book(2, "Head First Java", "Kathy Sierra");
+        Book b3 = new Book(3, "Effective Java", "Joshua Bloch");
+        b1.show(); b2.show(); b3.show();
+    }
+}`,`ID: 1, Title: Java Complete Reference, Author: Herbert Schildt
+ID: 2, Title: Head First Java, Author: Kathy Sierra
+ID: 3, Title: Effective Java, Author: Joshua Bloch`),P("Array of Student Objects",r`class Student {
+    int id; String name;
+    Student(int id, String name) { this.id = id; this.name = name; }
+}
+public class Main {
+    public static void main(String[] args) {
+        String[] names = {"Arun", "Bala", "Charan", "Deepak", "Esha"};
+        Student[] st = new Student[5];
+        for (int i = 0; i < 5; i++) st[i] = new Student(101 + i, names[i]);
+        for (Student s : st) System.out.println(s.id + " " + s.name);
+    }
+}`,`101 Arun
+102 Bala
+103 Charan
+104 Deepak
+105 Esha`),P("Reference Assignment",r`class Student { String name; }
+public class Main {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        s1.name = "Arun";
+        Student s2 = s1;          // both refer to the same object
+        s2.name = "Varun";
+        System.out.println("s1.name = " + s1.name);
+        System.out.println("s2.name = " + s2.name);
+    }
+}`,`s1.name = Varun
+s2.name = Varun`),P("Comparing Object References",r`class Student { int id; }
+public class Main {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        Student s2 = s1;
+        Student s3 = new Student();
+        System.out.println("s1 == s2 : " + (s1 == s2));
+        System.out.println("s1 == s3 : " + (s1 == s3));
+    }
+}`,`s1 == s2 : true
+s1 == s3 : false`),P("Calculator Using Methods",r`class Calculator {
+    int add(int a, int b) { return a + b; }
+    int sub(int a, int b) { return a - b; }
+    int mul(int a, int b) { return a * b; }
+    int div(int a, int b) { return a / b; }
+}
+public class Main {
+    public static void main(String[] args) {
+        Calculator c = new Calculator();
+        System.out.println("Add: " + c.add(20, 4));
+        System.out.println("Sub: " + c.sub(20, 4));
+        System.out.println("Mul: " + c.mul(20, 4));
+        System.out.println("Div: " + c.div(20, 4));
+    }
+}`,`Add: 24
+Sub: 16
+Mul: 80
+Div: 5`),
+P("Rectangle Operations",r`class Rectangle {
+    int length, width;
+    Rectangle(int l, int w) { length = l; width = w; }
+    int area() { return length * width; }
+    int perimeter() { return 2 * (length + width); }
+}
+public class Main {
+    public static void main(String[] args) {
+        Rectangle r = new Rectangle(8, 5);
+        System.out.println("Area: " + r.area());
+        System.out.println("Perimeter: " + r.perimeter());
+    }
+}`,`Area: 40
+Perimeter: 26`),
+P("Student Constructors",r`class Student {
+    int id; String name;
+    Student() { id = 0; name = "Unknown"; }
+    Student(int id, String name) { this.id = id; this.name = name; }
+    void show() { System.out.println(id + " " + name); }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Student().show();
+        new Student(101, "Karthikeya").show();
+    }
+}`,`0 Unknown
+101 Karthikeya`),P("Constructor Overloading",r`class Box {
+    int l, w, h;
+    Box() { l = w = h = 1; }
+    Box(int s) { l = w = h = s; }
+    Box(int l, int w, int h) { this.l = l; this.w = w; this.h = h; }
+    int volume() { return l * w * h; }
+}
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Volume 1: " + new Box().volume());
+        System.out.println("Volume 2: " + new Box(3).volume());
+        System.out.println("Volume 3: " + new Box(2, 3, 4).volume());
+    }
+}`,`Volume 1: 1
+Volume 2: 27
+Volume 3: 24`),P("Using this Keyword",r`class Student {
+    int id; String name;
+    Student(int id, String name) {
+        this.id = id;       // this.id = instance variable, id = parameter
+        this.name = name;
+    }
+    void show() { System.out.println("ID: " + this.id + ", Name: " + this.name); }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Student(7, "Karthikeya").show();
+    }
+}`,`ID: 7, Name: Karthikeya`),P("Constructor Chaining",r`class Student {
+    int id; String name; String branch;
+    Student() { this(0); System.out.println("Default constructor"); }
+    Student(int id) { this(id, "NoName"); System.out.println("One-arg constructor"); }
+    Student(int id, String name) {
+        this.id = id; this.name = name; this.branch = "AI&ML";
+        System.out.println("Two-arg constructor");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Student();
+    }
+}`,`Two-arg constructor
+One-arg constructor
+Default constructor`),P("Demonstrating Garbage Collection",r`public class Main {
+    @Override
+    protected void finalize() { System.out.println("Object garbage collected"); }
+    public static void main(String[] args) throws InterruptedException {
+        Main m = new Main();
+        m = null;              // object now eligible for GC
+        System.gc();           // request garbage collection
+        Thread.sleep(500);
+        System.out.println("End of main");
+    }
+}`,`Object garbage collected
+End of main
+(GC timing is not guaranteed; the first line may not appear on every JVM)`),P("Object Eligibility for Garbage Collection",r`class Demo { String n; Demo(String n) { this.n = n; } }
+public class Main {
+    public static void main(String[] args) {
+        Demo d1 = new Demo("A");
+        d1 = null;                         // 1. reference set to null
+        Demo d2 = new Demo("B");
+        d2 = new Demo("C");                // 2. reference re-assigned (B eligible)
+        new Demo("D");                     // 3. anonymous object
+        System.out.println("A, B and D are eligible; C is still referenced: " + d2.n);
+        System.gc();
+    }
+}`,`A, B and D are eligible; C is still referenced: C`),P("Method Overloading",r`class Add {
+    int sum(int a, int b) { return a + b; }
+    int sum(int a, int b, int c) { return a + b + c; }
+    double sum(double a, double b) { return a + b; }
+}
+public class Main {
+    public static void main(String[] args) {
+        Add o = new Add();
+        System.out.println(o.sum(10, 20));
+        System.out.println(o.sum(10, 20, 30));
+        System.out.println(o.sum(1.5, 2.5));
+    }
+}`,`30
+60
+4.0`),P("Overloading Area Methods",r`class Area {
+    double area(double r) { return Math.PI * r * r; }   // circle
+    int area(int l, int b) { return l * b; }            // rectangle
+    int area(int s) { return s * s; }                   // square
+}
+public class Main {
+    public static void main(String[] args) {
+        Area a = new Area();
+        System.out.println("Circle: " + a.area(2.0));
+        System.out.println("Rectangle: " + a.area(6, 4));
+        System.out.println("Square: " + a.area(5));
+    }
+}`,`Circle: 12.566370614359172
+Rectangle: 24
+Square: 25`),P("Passing Student Object",r`class Student {
+    int id; String name;
+    Student(int id, String name) { this.id = id; this.name = name; }
+}
+public class Main {
+    static void display(Student s) {
+        System.out.println("ID: " + s.id + ", Name: " + s.name);
+    }
+    public static void main(String[] args) {
+        display(new Student(101, "Karthikeya"));
+    }
+}`,`ID: 101, Name: Karthikeya`),P("Comparing Employee Salaries",r`class Employee {
+    String name; double salary;
+    Employee(String n, double s) { name = n; salary = s; }
+}
+public class Main {
+    static void compare(Employee a, Employee b) {
+        Employee h = (a.salary > b.salary) ? a : b;
+        System.out.println("Higher salary: " + h.name + " (" + h.salary + ")");
+    }
+    public static void main(String[] args) {
+        compare(new Employee("Ravi", 45000), new Employee("Sita", 52000));
+    }
+}`,`Higher salary: Sita (52000.0)`),P("Returning a Student Object",r`class Student {
+    int id; String name;
+    Student(int id, String name) { this.id = id; this.name = name; }
+}
+public class Main {
+    static Student create() { return new Student(102, "Bala"); }
+    public static void main(String[] args) {
+        Student s = create();
+        System.out.println(s.id + " " + s.name);
+    }
+}`,`102 Bala`),P("Returning a Bank Account Object",r`class Account {
+    int no; double balance;
+    Account(int no, double balance) { this.no = no; this.balance = balance; }
+}
+public class Main {
+    static Account deposit(Account a, double amt) {
+        a.balance += amt;
+        return a;
+    }
+    public static void main(String[] args) {
+        Account acc = new Account(1001, 5000);
+        Account updated = deposit(acc, 500);
+        System.out.println("Account " + updated.no + " balance: " + updated.balance);
+    }
+}`,`Account 1001 balance: 5500.0`),P("Static Variable",r`class Student {
+    static int count = 0;
+    Student() { count++; }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Student(); new Student(); new Student();
+        System.out.println("Total students: " + Student.count);
+    }
+}`,`Total students: 3`),P("Static Methods",r`public class Main {
+    static int square(int n) { return n * n; }
+    static int cube(int n) { return n * n * n; }
+    static int factorial(int n) { return n <= 1 ? 1 : n * factorial(n - 1); }
+    public static void main(String[] args) {
+        System.out.println("Square of 5: " + square(5));
+        System.out.println("Cube of 3: " + cube(3));
+        System.out.println("Factorial of 5: " + factorial(5));
+    }
+}`,`Square of 5: 25
+Cube of 3: 27
+Factorial of 5: 120`),P("Final Keyword",r`final class Base {                       // final class: cannot be extended
+    final int MAX = 100;                 // final variable: cannot change
+    final void show() { System.out.println("Final method, MAX = " + MAX); }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Base().show();
+        // class X extends Base {}  -> error: cannot inherit from final Base
+    }
+}`,`Final method, MAX = 100`),P("Blank Final Variable",r`class Student {
+    final int rollNo;                    // blank final
+    Student(int r) { rollNo = r; }
+}
+public class Main {
+    public static void main(String[] args) {
+        Student s = new Student(25094);
+        System.out.println("Roll No: " + s.rollNo);
+    }
+}`,`Roll No: 25094`),P("College and Department — Nested Class",r`class College {
+    String name = "ABC College";
+    static class Department {
+        void show() { System.out.println("Department: AI&ML"); }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        College.Department d = new College.Department();
+        d.show();
+    }
+}`,`Department: AI&ML`),P("Employee Address — Nested Class",r`class Employee {
+    String name = "Ravi";
+    static class Address {
+        String city = "Vijayawada", state = "Andhra Pradesh";
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Employee e = new Employee();
+        Employee.Address a = new Employee.Address();
+        System.out.println(e.name + " lives in " + a.city + ", " + a.state);
+    }
+}`,`Ravi lives in Vijayawada, Andhra Pradesh`),P("Student Address — Inner Class",r`class StudentAddressInner {
+    String name = "Karthikeya";
+    class Address {
+        String city = "Vijayawada";
+        void show() { System.out.println(name + " - " + city); }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        StudentAddressInner s = new StudentAddressInner();
+        StudentAddressInner.Address a = s.new Address();
+        a.show();
+    }
+}`,`Karthikeya - Vijayawada`),P("Library Management — Inner Class",r`class LibraryBookManager {
+    String library = "Central Library";
+    class Book {
+        int id; String title;
+        Book(int id, String title) { this.id = id; this.title = title; }
+        void show() { System.out.println(library + ": " + id + " - " + title); }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        LibraryBookManager m = new LibraryBookManager();
+        LibraryBookManager.Book b = m.new Book(1, "Effective Java");
+        b.show();
+    }
+}`,`Central Library: 1 - Effective Java`)]},
+7:{name:"Strings & Inheritance Intro",sub:"String classes, StringBuffer, StringTokenizer, super",progs:[P("String Constructors",r`public class Main {
+    public static void main(String[] args) {
+        String s1 = "Hello";                       // literal
+        String s2 = new String("Java");            // new keyword
+        char[] ch = {'J', 'a', 'v', 'a'};
+        String s3 = new String(ch);                // character array
+        byte[] b = {72, 101, 108, 108, 111};
+        String s4 = new String(b);                 // byte array
+        String s5 = new String();                  // empty string
+        System.out.println("Literal: " + s1);
+        System.out.println("new String(): " + s2);
+        System.out.println("Char array: " + s3);
+        System.out.println("Byte array: " + s4);
+        System.out.println("Empty string length: " + s5.length());
+    }
+}`,`Literal: Hello
+new String(): Java
+Char array: Java
+Byte array: Hello
+Empty string length: 0`),P("StringBuffer Class",r`public class Main {
+    public static void main(String[] args) {
+        StringBuffer sb = new StringBuffer("Hello");
+        sb.append(" World");       System.out.println("append  : " + sb);
+        sb.insert(5, ",");         System.out.println("insert  : " + sb);
+        sb.replace(0, 5, "Howdy"); System.out.println("replace : " + sb);
+        sb.delete(5, 6);           System.out.println("delete  : " + sb);
+        sb.reverse();              System.out.println("reverse : " + sb);
+    }
+}`,`append  : Hello World
+insert  : Hello, World
+replace : Howdy, World
+delete  : Howdy World
+reverse : dlroW ydwoH`),P("StringTokenizer Class",r`import java.util.StringTokenizer;
+public class Main {
+    public static void main(String[] args) {
+        StringTokenizer st = new StringTokenizer("Java is fun to learn");
+        System.out.println("Total tokens: " + st.countTokens());
+        while (st.hasMoreTokens()) System.out.println(st.nextToken());
+
+        StringTokenizer st2 = new StringTokenizer("apple,banana,cherry", ",");
+        System.out.println("Total tokens: " + st2.countTokens());
+        while (st2.hasMoreTokens()) System.out.println(st2.nextToken());
+    }
+}`,`Total tokens: 5
+Java
+is
+fun
+to
+learn
+Total tokens: 3
+apple
+banana
+cherry`),P("Basic Inheritance",r`class Animal {
+    void eat() { System.out.println("Eating..."); }
+}
+class Dog extends Animal {
+    void bark() { System.out.println("Barking..."); }
+}
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.eat();    // inherited from Animal
+        d.bark();
+    }
+}`,`Eating...
+Barking...`),P("Using super Keyword",r`class Parent {
+    int x = 10;
+    void show() { System.out.println("Parent method"); }
+}
+class Child extends Parent {
+    int x = 20;
+    void display() {
+        System.out.println("Child x = " + x);
+        System.out.println("Parent x = " + super.x);
+        super.show();
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Child().display();
+    }
+}`,`Child x = 20
+Parent x = 10
+Parent method`)]},
+8:{name:"Inheritance",sub:"Single, multilevel, overriding, dynamic dispatch",progs:[P("Single Inheritance",r`class Person {
+    String name; int age;
+    Person(String n, int a) { name = n; age = a; }
+}
+class Student extends Person {
+    String roll;
+    Student(String n, int a, String r) { super(n, a); roll = r; }
+    void display() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Roll No: " + roll);
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Student("Karthikeya", 19, "25EU02094").display();
+    }
+}`,`Name: Karthikeya
+Age: 19
+Roll No: 25EU02094`),P("Using super Keyword",r`class Person {
+    String name = "Person";
+    void show() { System.out.println("Person's show()"); }
+}
+class Student extends Person {
+    String name = "Student";
+    void print() {
+        System.out.println(name);
+        System.out.println(super.name);
+        super.show();
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Student().print();
+    }
+}`,`Student
+Person
+Person's show()`),P("Multilevel Inheritance",r`class Person {
+    void showName() { System.out.println("Person: Ravi"); }
+}
+class Employee extends Person {
+    void showId() { System.out.println("Employee ID: 501"); }
+}
+class Manager extends Employee {
+    void showDept() { System.out.println("Manager of: Sales"); }
+}
+public class Main {
+    public static void main(String[] args) {
+        Manager m = new Manager();
+        m.showName(); m.showId(); m.showDept();
+    }
+}`,`Person: Ravi
+Employee ID: 501
+Manager of: Sales`),P("Method Overriding",r`class Animal {
+    void sound() { System.out.println("Animal makes sound"); }
+}
+class Dog extends Animal {
+    @Override void sound() { System.out.println("Dog barks"); }
+}
+class Cat extends Animal {
+    @Override void sound() { System.out.println("Cat meows"); }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Animal().sound();
+        new Dog().sound();
+        new Cat().sound();
+    }
+}`,`Animal makes sound
+Dog barks
+Cat meows`),P("Dynamic Method Dispatch — Shapes",r`class Shape { double area() { return 0; } }
+class Circle extends Shape {
+    double r; Circle(double r) { this.r = r; }
+    double area() { return Math.PI * r * r; }
+}
+class Rectangle extends Shape {
+    double l, b; Rectangle(double l, double b) { this.l = l; this.b = b; }
+    double area() { return l * b; }
+}
+class Triangle extends Shape {
+    double b, h; Triangle(double b, double h) { this.b = b; this.h = h; }
+    double area() { return 0.5 * b * h; }
+}
+public class Main {
+    public static void main(String[] args) {
+        Shape[] shapes = { new Circle(2), new Rectangle(5, 4), new Triangle(6, 4) };
+        for (Shape s : shapes)
+            System.out.println(s.getClass().getSimpleName() + " area: " + s.area());
+    }
+}`,`Circle area: 12.566370614359172
+Rectangle area: 20.0
+Triangle area: 12.0`),P("super with Method Overriding",r`class Person {
+    String name = "Karthikeya";
+    void display() { System.out.println("Name: " + name); }
+}
+class Student extends Person {
+    String roll = "25EU02094";
+    @Override void display() {
+        super.display();                       // superclass version first
+        System.out.println("Roll No: " + roll);
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Student().display();
+    }
+}`,`Name: Karthikeya
+Roll No: 25EU02094`),P("Multilevel Inheritance — Salary",r`class Employee { double basic = 30000; }
+class Developer extends Employee { double bonus = 10000; }
+class SeniorDeveloper extends Developer {
+    double allowance = 5000;
+    double total() { return basic + bonus + allowance; }
+}
+public class Main {
+    public static void main(String[] args) {
+        SeniorDeveloper s = new SeniorDeveloper();
+        System.out.println("Total salary: " + s.total());
+    }
+}`,`Total salary: 45000.0`),P("Dynamic Dispatch — Bank Accounts",r`class BankAccount {
+    double balance = 10000;
+    double interest() { return 0; }
+}
+class SavingsAccount extends BankAccount {
+    double interest() { return balance * 4 / 100; }
+}
+class CurrentAccount extends BankAccount {
+    double interest() { return balance * 1 / 100; }
+}
+public class Main {
+    public static void main(String[] args) {
+        BankAccount acc;
+        acc = new SavingsAccount();
+        System.out.println("Savings interest: " + acc.interest());
+        acc = new CurrentAccount();
+        System.out.println("Current interest: " + acc.interest());
+    }
+}`,`Savings interest: 400.0
+Current interest: 100.0`),P("Constructor Execution Order",r`class A { A() { System.out.println("A constructor"); } }
+class B extends A { B() { System.out.println("B constructor"); } }
+class C extends B { C() { System.out.println("C constructor"); } }
+public class Main {
+    public static void main(String[] args) {
+        new C();
+    }
+}`,`A constructor
+B constructor
+C constructor`),P("Banking Application Using Inheritance",r`class Account {
+    int no; double balance;
+    Account(int no, double balance) { this.no = no; this.balance = balance; }
+    void deposit(double amt) { balance += amt; }
+    void withdraw(double amt) {
+        if (amt <= balance) balance -= amt;
+        else System.out.println("Insufficient balance");
+    }
+    void show() { System.out.println("Account " + no + " | Balance: " + balance); }
+}
+class SavingsAccount extends Account {
+    double rate;
+    SavingsAccount(int no, double bal, double rate) { super(no, bal); this.rate = rate; }
+    double interest() { return balance * rate / 100; }
+}
+public class Main {
+    public static void main(String[] args) {
+        SavingsAccount s = new SavingsAccount(1001, 5000, 5);
+        s.show();
+        s.deposit(2000); System.out.print("After deposit  -> "); s.show();
+        s.withdraw(500); System.out.print("After withdraw -> "); s.show();
+        System.out.println("Interest (5%): " + s.interest());
+    }
+}`,`Account 1001 | Balance: 5000.0
+After deposit  -> Account 1001 | Balance: 7000.0
+After withdraw -> Account 1001 | Balance: 6500.0
+Interest (5%): 325.0`)]},
+9:{name:"Packages & Interfaces",sub:"Packages, CLASSPATH, interfaces",progs:[P("Creating a User-Defined Package",r`// File: mypackage/Student.java
+package mypackage;
+public class Student {
+    public void show() { System.out.println("Student: Karthikeya, Roll: 25EU02094"); }
+}
+
+// File: Main.java  (outside the package)
+import mypackage.Student;
+public class Main {
+    public static void main(String[] args) {
+        new Student().show();
+    }
+}
+
+// Compile & run:
+//   javac mypackage/Student.java
+//   javac Main.java
+//   java Main`,`Student: Karthikeya, Roll: 25EU02094`),P("Importing Packages",r`// File: college/Student.java
+package college;
+public class Student { public void show() { System.out.println("Student class"); } }
+
+// File: college/Faculty.java
+package college;
+public class Faculty { public void show() { System.out.println("Faculty class"); } }
+
+// File: Main.java
+import college.Student;      // specific import
+import college.*;            // wildcard import (Faculty comes from here)
+public class Main {
+    public static void main(String[] args) {
+        new Student().show();
+        new Faculty().show();
+        new college.Student().show();   // fully qualified name
+    }
+}`,`Student class
+Faculty class
+Student class`),P("Packages and Member Access",r`// File: p1/A.java
+package p1;
+public class A {
+    public int pub = 1; private int pri = 2; protected int pro = 3; int def = 4;
+    public void showAll() {
+        System.out.println("Same class: public=" + pub + " private=" + pri + " protected=" + pro + " default=" + def);
+    }
+}
+
+// File: p1/B.java  (same package)
+package p1;
+public class B {
+    public void test() {
+        A a = new A();
+        System.out.println("Same package: public=" + a.pub + " protected=" + a.pro + " default=" + a.def);
+        // a.pri -> error: private
+    }
+}
+
+// File: p2/C.java  (different package)
+package p2;
+import p1.*;
+public class C {
+    public static void main(String[] args) {
+        new A().showAll();
+        new B().test();
+        A a = new A();
+        System.out.println("Different package: public=" + a.pub);
+        // a.pro, a.def, a.pri -> errors outside p1 (protected only via subclass)
+    }
+}
+
+// javac p1/*.java p2/C.java   then   java p2.C`,`Same class: public=1 private=2 protected=3 default=4
+Same package: public=1 protected=3 default=4
+Different package: public=1`),P("Demonstrate CLASSPATH",r`// File: utilities/Calculator.java
+package utilities;
+public class Calculator {
+    public int add(int a, int b) { return a + b; }
+    public int mul(int a, int b) { return a * b; }
+}
+
+// File: Main.java
+import utilities.Calculator;
+public class Main {
+    public static void main(String[] args) {
+        Calculator c = new Calculator();
+        System.out.println("Sum: " + c.add(10, 20));
+        System.out.println("Product: " + c.mul(10, 20));
+    }
+}
+
+// Commands (Windows):
+//   javac -d C:\javalib utilities\Calculator.java
+//   set CLASSPATH=C:\javalib;.
+//   javac Main.java
+//   java Main`,`Sum: 30
+Product: 200`),P("Package with Multiple Classes",r`// File: bank/Account.java
+package bank;
+public class Account {
+    public int no = 1001; public double balance = 5000;
+}
+
+// File: bank/Customer.java
+package bank;
+public class Customer {
+    public String name = "Karthikeya";
+}
+
+// File: bank/Transaction.java
+package bank;
+public class Transaction {
+    public void deposit(Account a, double amt) { a.balance += amt; }
+}
+
+// File: Main.java
+import bank.*;
+public class Main {
+    public static void main(String[] args) {
+        Account a = new Account();
+        Customer c = new Customer();
+        new Transaction().deposit(a, 1500);
+        System.out.println("Customer: " + c.name);
+        System.out.println("Account " + a.no + " balance: " + a.balance);
+    }
+}`,`Customer: Karthikeya
+Account 1001 balance: 6500.0`),P("Defining & Implementing an Interface",r`interface Shape {
+    double area();
+}
+class Circle implements Shape {
+    double r = 2;
+    public double area() { return Math.PI * r * r; }
+}
+class Rectangle implements Shape {
+    double l = 5, b = 4;
+    public double area() { return l * b; }
+}
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Circle area: " + new Circle().area());
+        System.out.println("Rectangle area: " + new Rectangle().area());
+    }
+}`,`Circle area: 12.566370614359172
+Rectangle area: 20.0`),P("Implementing Multiple Interfaces",r`interface Printable { void print(); }
+interface Showable { void show(); }
+class Demo implements Printable, Showable {
+    public void print() { System.out.println("Printing..."); }
+    public void show() { System.out.println("Showing..."); }
+}
+public class Main {
+    public static void main(String[] args) {
+        Demo d = new Demo();
+        d.print();
+        d.show();
+    }
+}`,`Printing...
+Showing...`),P("Interface-Based Polymorphism",r`interface Vehicle { void start(); }
+class Car implements Vehicle {
+    public void start() { System.out.println("Car starts with a key"); }
+}
+class Bike implements Vehicle {
+    public void start() { System.out.println("Bike starts with a kick"); }
+}
+public class Main {
+    public static void main(String[] args) {
+        Vehicle v;
+        v = new Car();  v.start();
+        v = new Bike(); v.start();
+    }
+}`,`Car starts with a key
+Bike starts with a kick`),P("Variables in Interfaces",r`interface Constants {
+    int MAX_MARKS = 100;          // public static final by default
+    double PI = 3.14;
+}
+class Test implements Constants {
+    void show() {
+        System.out.println("MAX_MARKS = " + MAX_MARKS);
+        System.out.println("PI = " + PI);
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        new Test().show();
+        System.out.println("Direct access: " + Constants.MAX_MARKS);
+    }
+}`,`MAX_MARKS = 100
+PI = 3.14
+Direct access: 100`),P("Nested Interfaces",r`class University {
+    interface Department {
+        void show();
+    }
+}
+class AIML implements University.Department {
+    public void show() { System.out.println("Department of AI&ML"); }
+}
+public class Main {
+    public static void main(String[] args) {
+        University.Department d = new AIML();
+        d.show();
+    }
+}`,`Department of AI&ML`),P("Interface Inheritance",r`interface Animal { void eat(); }
+interface Dog extends Animal { void bark(); }
+class Labrador implements Dog {
+    public void eat() { System.out.println("Labrador eats"); }
+    public void bark() { System.out.println("Labrador barks"); }
+}
+public class Main {
+    public static void main(String[] args) {
+        Labrador l = new Labrador();
+        l.eat();
+        l.bark();
+    }
+}`,`Labrador eats
+Labrador barks`),P("Real-World Application Using Interfaces",r`interface Payment {
+    void pay(double amount);
+}
+class CreditCard implements Payment {
+    public void pay(double amount) { System.out.println("Paid " + amount + " using Credit Card"); }
+}
+class UPI implements Payment {
+    public void pay(double amount) { System.out.println("Paid " + amount + " using UPI"); }
+}
+public class Main {
+    public static void main(String[] args) {
+        Payment p = new CreditCard(); p.pay(2500);
+        p = new UPI();                p.pay(1200);
+    }
+}`,`Paid 2500.0 using Credit Card
+Paid 1200.0 using UPI`)]},10:{name:"Exceptions & I/O Streams",sub:"Exception handling keywords, user-defined exceptions and file handling with byte streams",progs:[
+P("try-catch: Division by Zero",r`public class DivideDemo { public static void main(String[] args) { int a = 20, b = 0; try { int result = a / b; System.out.println("Result = " + result); } catch (ArithmeticException e) { System.out.println("Exception caught: " + e); System.out.println("Message: " + e.getMessage()); } System.out.println("Program continues after the try-catch block."); } }`,`Exception caught: java.lang.ArithmeticException: / by zero
+Message: / by zero
+Program continues after the try-catch block.`),
+P("Common Runtime Exceptions",r`public class RuntimeExceptionsDemo { public static void main(String[] args) { try { int numerator = 10, denominator = 0; int x = numerator / denominator; } catch (ArithmeticException e) { System.out.println("ArithmeticException handled"); } try { int[] a = {1, 2}; System.out.println(a[5]); } catch (ArrayIndexOutOfBoundsException e) { System.out.println("ArrayIndexOutOfBoundsException handled"); } try { String s = null; s.length(); } catch (NullPointerException e) { System.out.println("NullPointerException handled"); } try { Integer.parseInt("abc"); } catch (NumberFormatException e) { System.out.println("NumberFormatException handled"); } } }`,`ArithmeticException handled
+ArrayIndexOutOfBoundsException handled
+NullPointerException handled
+NumberFormatException handled`),
+P("Uncaught Exception",r`public class UncaughtDemo { public static void main(String[] args) { int numerator = 10, denominator = 0; int result = numerator / denominator; System.out.println(result); } }`,`Exception in thread "main" java.lang.ArithmeticException: / by zero`),
+P("Multiple Catch Clauses",r`public class MultipleCatchDemo { public static void main(String[] args) { try { int[] values = {10, 20}; System.out.println(values[4]); } catch (ArrayIndexOutOfBoundsException e) { System.out.println("Invalid array index"); } catch (NumberFormatException e) { System.out.println("Invalid number"); } catch (NullPointerException e) { System.out.println("Null value"); } catch (ArithmeticException e) { System.out.println("Arithmetic error"); } } }`,`Invalid array index`),
+P("The throw Statement",r`public class VotingDemo { static void checkAge(int age) { if (age < 18) throw new IllegalArgumentException("Age is below voting age"); System.out.println("Eligible to vote"); } public static void main(String[] args) { try { checkAge(16); } catch (IllegalArgumentException e) { System.out.println(e.getMessage()); } } }`,`Age is below voting age`),
+P("throws and Propagation",r`import java.io.IOException; public class PropagationDemo { static void first() throws IOException { throw new IOException("File could not be opened"); } static void second() throws IOException { first(); } public static void main(String[] args) { try { second(); } catch (IOException e) { System.out.println("Handled: " + e.getMessage()); } } }`,`Handled: File could not be opened`),
+P("The finally Block",r`public class FinallyDemo { public static void main(String[] args) { try { int n = 12 / 3; System.out.println("Result: " + n); try { int x = 5 / 0; } catch (NullPointerException e) { System.out.println("Inner catch"); } } catch (ArithmeticException e) { System.out.println("Outer catch: " + e.getMessage()); } finally { System.out.println("Finally block always executes"); } } }`,`Result: 4
+Outer catch: / by zero
+Finally block always executes`),
+P("User-Defined Exception",r`class InvalidAgeException extends Exception { InvalidAgeException(String message) { super(message); } } public class AgeValidation { static void validate(int age) throws InvalidAgeException { if (age < 18 || age > 60) throw new InvalidAgeException("Age must be between 18 and 60"); System.out.println("Age accepted"); } public static void main(String[] args) { try { validate(17); } catch (InvalidAgeException e) { System.out.println(e.getMessage()); } } }`,`Age must be between 18 and 60`),
+P("Student Marks Validation",r`class InvalidMarksException extends Exception { InvalidMarksException(int marks) { super("Invalid marks: " + marks); } } public class MarksValidation { static void validate(int marks) throws InvalidMarksException { if (marks < 0 || marks > 100) throw new InvalidMarksException(marks); System.out.println("Accepted: " + marks); } public static void main(String[] args) { int[] marks = {85, 105, 72}; for (int mark : marks) { try { validate(mark); } catch (InvalidMarksException e) { System.out.println(e.getMessage()); } } } }`,`Accepted: 85
+Invalid marks: 105
+Accepted: 72`),
+P("Combined Exception Application",r`class BankAccount { private double balance = 5000; void withdraw(double amount) throws Exception { if (amount <= 0) throw new IllegalArgumentException("Amount must be positive"); if (amount > balance) throw new Exception("Insufficient balance"); balance -= amount; System.out.println("Balance: " + balance); } } public class BankDemo { public static void main(String[] args) { BankAccount account = new BankAccount(); try { account.withdraw(6000); } catch (Exception e) { System.out.println("Withdrawal failed: " + e.getMessage()); } finally { System.out.println("Transaction finished"); } } }`,`Withdrawal failed: Insufficient balance
+Transaction finished`),
+P("InputStream and OutputStream",r`import java.io.*; public class StreamTransfer { public static void main(String[] args) throws IOException { byte[] data = "Java Streams".getBytes(); try (InputStream in = new ByteArrayInputStream(data); ByteArrayOutputStream out = new ByteArrayOutputStream()) { int value; while ((value = in.read()) != -1) out.write(value); System.out.println(out.toString()); } } }`,`Java Streams`),
+P("Read a File with FileInputStream",r`import java.io.*; public class ReadBytes { public static void main(String[] args) throws IOException { try (FileInputStream in = new FileInputStream("data.txt")) { int value; while ((value = in.read()) != -1) System.out.print((char) value); } } }`,`Hello from data.txt`),
+P("Write a File with FileOutputStream",r`import java.io.*; public class WriteBytes { public static void main(String[] args) throws IOException { String text = "Java byte streams"; try (FileOutputStream out = new FileOutputStream("data.txt")) { out.write(text.getBytes()); } try (FileInputStream in = new FileInputStream("data.txt")) { int value; while ((value = in.read()) != -1) System.out.print((char) value); } } }`,`Java byte streams`),
+P("Copy a File",r`import java.io.*; public class CopyFile { public static void main(String[] args) { try (FileInputStream in = new FileInputStream("source.txt"); FileOutputStream out = new FileOutputStream("copy.txt")) { byte[] buffer = new byte[1024]; int count; while ((count = in.read(buffer)) != -1) out.write(buffer, 0, count); System.out.println("File copied successfully"); } catch (FileNotFoundException e) { System.out.println("Source file is missing"); } catch (IOException e) { System.out.println("I/O error: " + e.getMessage()); } } }`,`File copied successfully`),
+P("Copy an Image with Exception Handling",r`import java.io.*; public class CopyImage { public static void main(String[] args) { FileInputStream in = null; FileOutputStream out = null; try { in = new FileInputStream("photo.jpg"); out = new FileOutputStream("photo-copy.jpg"); byte[] buffer = new byte[4096]; int count; while ((count = in.read(buffer)) != -1) out.write(buffer, 0, count); System.out.println("Image copied successfully"); } catch (FileNotFoundException e) { System.out.println("Image file not found"); } catch (IOException e) { System.out.println("I/O error: " + e.getMessage()); } finally { try { if (in != null) in.close(); if (out != null) out.close(); } catch (IOException e) { System.out.println("Could not close streams"); } } } }`,`Image copied successfully`)]},
+11:{name:"Character Streams & Multithreading",sub:"Reader and Writer classes, FileReader, FileWriter, and creating and controlling threads",progs:[
+P("Read from Keyboard with Reader, Display with Writer",r`import java.io.*; public class KeyboardReaderWriter { public static void main(String[] args) throws IOException { Reader reader = new InputStreamReader(System.in); Writer writer = new OutputStreamWriter(System.out); int ch; while ((ch = reader.read()) != -1 && ch != '#') writer.write(ch); writer.flush(); } }`,`Hello`),
+P("Read a File with FileReader",r`import java.io.*; public class ReadText { public static void main(String[] args) throws IOException { try (FileReader reader = new FileReader("input.txt")) { int ch; while ((ch = reader.read()) != -1) System.out.print((char) ch); } } }`,`Text from input.txt`),
+P("Write Text into a File with FileWriter",r`import java.io.*; public class WriteText { public static void main(String[] args) throws IOException { BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in)); System.out.print("Enter text: "); String text = keyboard.readLine(); try (FileWriter writer = new FileWriter("output.txt")) { writer.write(text); } System.out.println("Text saved successfully"); } }`,`Enter text: Hello Java
+Text saved successfully`),
+P("Copy a Text File with FileReader and FileWriter",r`import java.io.*; public class CopyText { public static void main(String[] args) throws IOException { try (FileReader reader = new FileReader("source.txt"); FileWriter writer = new FileWriter("copy.txt")) { int ch; while ((ch = reader.read()) != -1) writer.write(ch); } System.out.println("Text file copied successfully"); } }`,`Text file copied successfully`),
+P("Count Characters, Words and Lines in a File",r`import java.io.*; public class FileCount { public static void main(String[] args) throws IOException { int chars = 0, words = 0, lines = 0; try (BufferedReader reader = new BufferedReader(new FileReader("input.txt"))) { String line; while ((line = reader.readLine()) != null) { lines++; chars += line.length(); words += line.trim().isEmpty() ? 0 : line.trim().split("\\s+").length; } } System.out.println("Lines: " + lines); System.out.println("Words: " + words); System.out.println("Characters: " + chars); } }`,`Lines: 2
+Words: 5
+Characters: 23`),
+P("Main Thread: Name, Priority and State",r`public class MainThreadInfo { public static void main(String[] args) { Thread t = Thread.currentThread(); System.out.println("Name: " + t.getName()); System.out.println("Priority: " + t.getPriority()); System.out.println("State: " + t.getState()); t.setName("LabMain"); t.setPriority(Thread.MAX_PRIORITY); System.out.println("Updated: " + t.getName() + ", " + t.getPriority()); } }`,`Name: main
+Priority: 5
+State: RUNNABLE
+Updated: LabMain, 10`),
+P("Create a Thread by Extending Thread",r`class PrintThread extends Thread { public void run() { for (int i = 1; i <= 3; i++) System.out.println("Child thread: " + i); } } public class ThreadDemo { public static void main(String[] args) { new PrintThread().start(); } }`,`Child thread: 1
+Child thread: 2
+Child thread: 3`),
+P("Create a Thread by Implementing Runnable",r`class PrintTask implements Runnable { public void run() { for (int i = 1; i <= 3; i++) System.out.println(Thread.currentThread().getName() + ": " + i); } } public class RunnableDemo { public static void main(String[] args) { new Thread(new PrintTask(), "Worker").start(); } }`,`Worker: 1
+Worker: 2
+Worker: 3`),
+P("Multiple Threads Running Concurrently",r`class NumberTask implements Runnable { private String name; NumberTask(String name) { this.name = name; } public void run() { for (int i = 1; i <= 3; i++) { System.out.println(name + " step " + i); try { Thread.sleep(100); } catch (InterruptedException e) { Thread.currentThread().interrupt(); } } } } public class ConcurrentDemo { public static void main(String[] args) throws InterruptedException { Thread a = new Thread(new NumberTask("A")); Thread b = new Thread(new NumberTask("B")); Thread c = new Thread(new NumberTask("C")); a.start(); b.start(); c.start(); a.join(); b.join(); c.join(); } }`,`Thread A, B and C each print three steps; their output interleaves`),
+P("isAlive() Method",r`public class AliveDemo { public static void main(String[] args) throws InterruptedException { Thread worker = new Thread(() -> { try { Thread.sleep(200); } catch (InterruptedException e) { Thread.currentThread().interrupt(); } }); System.out.println("Before start: " + worker.isAlive()); worker.start(); System.out.println("After start: " + worker.isAlive()); worker.join(); System.out.println("After completion: " + worker.isAlive()); } }`,`Before start: false
+After start: true
+After completion: false`),
+P("join() Method",r`class PartialSum extends Thread { private int start, end, sum; PartialSum(int start, int end) { this.start = start; this.end = end; } public void run() { for (int i = start; i <= end; i++) sum += i; } int getSum() { return sum; } } public class JoinSum { public static void main(String[] args) throws InterruptedException { PartialSum a = new PartialSum(1, 50), b = new PartialSum(51, 100); a.start(); b.start(); a.join(); b.join(); System.out.println("Total: " + (a.getSum() + b.getSum())); } }`,`Total: 5050`),
+P("Multiple Threads with isAlive() and join()",r`public class JoinAliveDemo { public static void main(String[] args) throws InterruptedException { Thread[] workers = new Thread[3]; for (int i = 0; i < workers.length; i++) { final int id = i + 1; workers[i] = new Thread(() -> { try { Thread.sleep(100); } catch (InterruptedException e) { Thread.currentThread().interrupt(); } System.out.println("Worker " + id + " finished"); }); workers[i].start(); } for (Thread worker : workers) System.out.println(worker.getName() + " alive: " + worker.isAlive()); for (Thread worker : workers) worker.join(); System.out.println("All workers finished"); } }`,`Three workers are checked with isAlive(), then joined until all finish`)]},
+12:{name:"Multithreading & Lambda Expressions",sub:"Thread priorities, synchronization, functional interfaces and lambda expressions",progs:[
+P("Thread Priorities",r`public class PriorityDemo { public static void main(String[] args) { Thread low = new Thread(() -> {}), normal = new Thread(() -> {}), high = new Thread(() -> {}); low.setPriority(Thread.MIN_PRIORITY); normal.setPriority(Thread.NORM_PRIORITY); high.setPriority(Thread.MAX_PRIORITY); System.out.println("Low: " + low.getPriority()); System.out.println("Normal: " + normal.getPriority()); System.out.println("High: " + high.getPriority()); } }`,`Low: 1
+Normal: 5
+High: 10`),
+P("Three Threads with Different Priorities",r`class CalculationTask extends Thread { CalculationTask(String name, int priority) { super(name); setPriority(priority); } public void run() { long sum = 0; for (int i = 1; i <= 1000; i++) sum += i; System.out.println(getName() + " (priority " + getPriority() + "): " + sum); } } public class PriorityTasks { public static void main(String[] args) throws InterruptedException { Thread a = new CalculationTask("Low", Thread.MIN_PRIORITY); Thread b = new CalculationTask("Normal", Thread.NORM_PRIORITY); Thread c = new CalculationTask("High", Thread.MAX_PRIORITY); a.start(); b.start(); c.start(); a.join(); b.join(); c.join(); } }`,`Each thread displays its priority and the same calculated sum: 500500`),
+P("Synchronized Method",r`class Counter { private int value; synchronized void increment() { value++; } int getValue() { return value; } } public class SyncMethodDemo { public static void main(String[] args) throws InterruptedException { Counter c = new Counter(); Runnable task = () -> { for (int i = 0; i < 1000; i++) c.increment(); }; Thread a = new Thread(task), b = new Thread(task); a.start(); b.start(); a.join(); b.join(); System.out.println("Final count: " + c.getValue()); } }`,`Final count: 2000`),
+P("Synchronized Block",r`class BlockCounter { private int value; void increment() { synchronized (this) { value++; } } int getValue() { return value; } } public class SyncBlockDemo { public static void main(String[] args) throws InterruptedException { BlockCounter c = new BlockCounter(); Runnable task = () -> { for (int i = 0; i < 1000; i++) c.increment(); }; Thread a = new Thread(task), b = new Thread(task); a.start(); b.start(); a.join(); b.join(); System.out.println("Final count: " + c.getValue()); } }`,`Final count: 2000`),
+P("Race Condition and Synchronization",r`class SafeCounter { private int value; synchronized void increment() { value++; } int getValue() { return value; } } public class RaceDemo { public static void main(String[] args) throws InterruptedException { SafeCounter counter = new SafeCounter(); Runnable task = () -> { for (int i = 0; i < 10000; i++) counter.increment(); }; Thread a = new Thread(task), b = new Thread(task); a.start(); b.start(); a.join(); b.join(); System.out.println("Synchronized result: " + counter.getValue()); } }`,`Synchronized result: 20000`),
+P("Synchronized Ticket Booking",r`class TicketOffice { private int seats = 3; synchronized void book(String customer) { if (seats > 0) { System.out.println(customer + " booked a seat"); seats--; } else System.out.println(customer + ": no seats available"); } } public class BookingDemo { public static void main(String[] args) throws InterruptedException { TicketOffice office = new TicketOffice(); Thread[] customers = new Thread[5]; for (int i = 0; i < customers.length; i++) { final String name = "Customer " + (i + 1); customers[i] = new Thread(() -> office.book(name)); customers[i].start(); } for (Thread customer : customers) customer.join(); } }`,`Three customers book seats; the remaining customers see no seats available`),
+P("Lambda Functional Interface for Arithmetic",r`@FunctionalInterface interface Operation { int apply(int a, int b); } public class ArithmeticLambda { public static void main(String[] args) { Operation add = (a, b) -> a + b; Operation subtract = (a, b) -> a - b; Operation multiply = (a, b) -> a * b; Operation divide = (a, b) -> a / b; System.out.println("Add: " + add.apply(12, 4)); System.out.println("Subtract: " + subtract.apply(12, 4)); System.out.println("Multiply: " + multiply.apply(12, 4)); System.out.println("Divide: " + divide.apply(12, 4)); } }`,`Add: 16
+Subtract: 8
+Multiply: 48
+Divide: 3`),
+P("Lambda with Single and Multiple Parameters",r`import java.util.function.*; public class LambdaParameters { public static void main(String[] args) { Function<Integer, Integer> square = n -> n * n; BiFunction<Integer, Integer, Integer> add = (a, b) -> a + b; System.out.println("Square: " + square.apply(6)); System.out.println("Sum: " + add.apply(8, 5)); } }`,`Square: 36
+Sum: 13`),
+P("Block Lambda Expression",r`import java.util.function.Function; public class FactorialLambda { public static void main(String[] args) { Function<Integer, Long> factorial = n -> { long result = 1; for (int i = 1; i <= n; i++) result *= i; return result; }; System.out.println("Factorial: " + factorial.apply(5)); } }`,`Factorial: 120`),
+P("Largest of Two Numbers using Block Lambda",r`import java.util.function.BiFunction; public class LargestLambda { public static void main(String[] args) { BiFunction<Integer, Integer, Integer> largest = (a, b) -> { if (a > b) return a; return b; }; System.out.println("Largest: " + largest.apply(24, 37)); } }`,`Largest: 37`),
+P("Generic Functional Interface with Lambda",r`@FunctionalInterface interface Display<T> { void show(T value); } public class GenericLambda { public static void main(String[] args) { Display<String> text = value -> System.out.println("Text: " + value); Display<Integer> number = value -> System.out.println("Number: " + value); text.show("Java"); number.show(25); } }`,`Text: Java
+Number: 25`),
+P("Generic Functional Interface with Two Values",r`@FunctionalInterface interface Combine<T, R> { R apply(T first, T second); } public class GenericCombine { public static void main(String[] args) { Combine<Integer, Integer> add = (a, b) -> a + b; Combine<String, String> join = (a, b) -> a + b; Combine<Integer, Integer> multiply = (a, b) -> a * b; System.out.println("Sum: " + add.apply(4, 5)); System.out.println("Joined: " + join.apply("Hello, ", "Java")); System.out.println("Product: " + multiply.apply(4, 5)); } }`,`Sum: 9
+Joined: Hello, Java
+Product: 20`),
+P("Display and Filter ArrayList using Lambda",r`import java.util.*; public class FilterList { public static void main(String[] args) { List<Integer> numbers = Arrays.asList(4, 7, 10, 13, 16); System.out.println("All: " + numbers); System.out.print("Even: "); numbers.stream().filter(n -> n % 2 == 0).forEach(n -> System.out.print(n + " ")); } }`,`All: [4, 7, 10, 13, 16]
+Even: 4 10 16`),
+P("Sort Integers and Strings using Lambda",r`import java.util.*; public class LambdaSort { public static void main(String[] args) { List<Integer> numbers = new ArrayList<>(Arrays.asList(42, 7, 19, 3)); List<String> names = new ArrayList<>(Arrays.asList("Ravi", "Anu", "Kiran")); numbers.sort((a, b) -> a.compareTo(b)); names.sort((a, b) -> a.compareTo(b)); System.out.println(numbers); System.out.println(names); } }`,`[3, 7, 19, 42]
+[Anu, Kiran, Ravi]`),
+P("Thread using Lambda Expression",r`public class LambdaThread { public static void main(String[] args) throws InterruptedException { Thread worker = new Thread(() -> { for (int i = 1; i <= 3; i++) System.out.println("Lambda thread: " + i); }); worker.start(); worker.join(); } }`,`Lambda thread: 1
+Lambda thread: 2
+Lambda thread: 3`)]}
+};
+const app=document.getElementById("app");
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const num=n=>String(n).padStart(2,"0");
+function home(){
+ app.innerHTML=`<section class="hero"><div><p class="crumb">JAVA PROGRAMMING · LAB NOTEBOOK</p>
+ <h1>Learning <em>Java</em>, One Program at a Time.</h1><p>Every week's programs, source code and console output — collected in one place. Pick a week to start exploring.</p></div>
+ <div class="id"><div class="monogram" aria-hidden="true">YB</div><h3>Y.Bunsy Chowdary</h3>
+ <table><tr><td>Roll No</td><td>25EU02130</td></tr><tr><td>Year</td><td>II</td></tr><tr><td>Branch</td><td>AI&amp;ML</td></tr><tr><td>Section</td><td>B</td></tr><tr><td>Subject</td><td>Java Programming</td></tr></table></div></section>
+ <h2>Weekly Index</h2><div class="grid">${Object.keys(W).map(k=>`<a class="wk" href="#/w/${k}"><small>WEEK</small><b>${num(k)}</b><small>${W[k].name}</small></a>`).join("")}</div>`;
+}
+function week(k){
+ const w=W[k];if(!w)return home();
+ let h=`<p class="crumb"><a href="#/">Home</a> / Week ${k}</p><h1>Week ${k}: ${w.name}</h1><p class="pend">${w.sub}</p>`;
+ if(w.none)h+=`<p>📭 No programming task was assigned this week.</p>`;
+ if(w.table){h+=`<table class="cmp"><tr>${w.table.h.map(x=>`<th>${x}</th>`).join("")}</tr>${w.table.r.map(r=>`<tr>${r.map((x,i)=>i?`<td>${x}</td>`:`<th>${x}</th>`).join("")}</tr>`).join("")}</table>`}
+ if(w.steps)w.steps.forEach(s=>h+=`<h2>${s[0]}</h2><ol>${s[1].map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`);
+ if(w.progs)h+=`<div class="plist">${w.progs.map((p,i)=>`<a href="#/w/${k}/${i+1}"><i>${num(i+1)}</i><span>${p.t}${p.c?"":' <small class="pend">(code pending)</small>'}</span></a>`).join("")}</div>`;
+ app.innerHTML=h;
+}
+function formatJava(code) {
+ const lines = [];
+ let line = "", indent = 0, parens = 0, quote = "", escaped = false;
+ const flush = () => {
+  const value = line.trim();
+  if (value) lines.push("  ".repeat(indent) + value);
+  line = "";
+ };
+ for (let i = 0; i < code.length; i++) {
+  const ch = code[i];
+  if (quote) {
+   line += ch;
+   if (escaped) escaped = false;
+   else if (ch === "\\") escaped = true;
+   else if (ch === quote) quote = "";
+   continue;
+  }
+  if (ch === "\"" || ch === "'") { quote = ch; line += ch; continue; }
+  if (ch === "(") parens++;
+  else if (ch === ")") parens = Math.max(0, parens - 1);
+  if (ch === "{") { line = line.trimEnd() + " {"; flush(); indent++; continue; }
+  if (ch === "}") {
+   flush();
+   indent = Math.max(0, indent - 1);
+   line = "}";
+   let j = i + 1;
+   while (j < code.length && /\s/.test(code[j])) j++;
+   if (/^(catch|finally|else)\b/.test(code.slice(j))) { line += " "; i = j - 1; }
+   else if (code[j] === ";") { line += ";"; i = j; flush(); }
+   else if (code[j] === ")" || code[j] === ",") { line += code[j]; i = j; }
+   else flush();
+   continue;
+  }
+  if (ch === ";" && parens === 0) { line = line.trimEnd() + ";"; flush(); continue; }
+  if (/\s/.test(ch)) { if (line && !line.endsWith(" ")) line += " "; continue; }
+  line += ch;
+ }
+ flush();
+ return lines.join("\n");
+}
+function prog(k,n){
+ const w=W[k],p=w&&w.progs&&w.progs[n-1];if(!p)return home();
+ let h=`<p class="crumb"><a href="#/">Home</a> / <a href="#/w/${k}">Week ${k}</a> / Program ${n}</p><h1>Program ${num(n)}</h1><p><b>Aim:</b> ${p.t}</p>`;
+ h+=p.c?`<div class="lbl">SOURCE CODE</div><pre>${esc(Number(k) >= 10 ? formatJava(p.c) : p.c)}</pre><div class="lbl">OUTPUT</div><pre class="out">${esc(p.o)}</pre>`:`<p class="pend">Code and output for this program will be added soon.</p>`;
+ h+=`<div class="nav">${n>1?`<a href="#/w/${k}/${n-1}">← Previous</a>`:`<span></span>`}${n<w.progs.length?`<a href="#/w/${k}/${+n+1}">Next →</a>`:`<a href="#/w/${k}">All programs</a>`}</div>`;
+ app.innerHTML=h;
+}
+let toastDismissed=false;const welcomeToast=document.getElementById("welcome-toast");document.getElementById("welcome-close").addEventListener("click",()=>{toastDismissed=true;welcomeToast.classList.remove("show")});
+function route(){const p=location.hash.split("/");window.scrollTo(0,0);welcomeToast.classList.toggle("show",(!p[1]||p[1]==="")&&!toastDismissed);
+ if(p[1]==="w"&&p[3])prog(p[2],+p[3]);else if(p[1]==="w")week(p[2]);else home();}
+addEventListener("hashchange",route);route();
+</script></body></html>
+
+
